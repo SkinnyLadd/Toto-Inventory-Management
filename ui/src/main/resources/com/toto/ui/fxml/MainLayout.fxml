@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.MainLayoutController" stylesheets="@../styles/styles.css">
+    <top>
+        <HBox styleClass="header-bar">
+            <Label text="Furniture Inventory Management" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="settingsButton" styleClass="icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-cog" iconSize="16"/>
+                </graphic>
+            </Button>
+            <padding>
+                <Insets top="10" right="15" bottom="10" left="15"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox styleClass="sidebar">
+            <Button fx:id="dashboardButton" text="Dashboard" styleClass="sidebar-button" onAction="#showDashboard">
+                <graphic>
+                    <FontIcon iconLiteral="fas-home" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="chairsButton" text="Chairs" styleClass="sidebar-button" onAction="#showChairs">
+                <graphic>
+                    <FontIcon iconLiteral="fas-chair" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="bedsButton" text="Beds" styleClass="sidebar-button" onAction="#showBeds">
+                <graphic>
+                    <FontIcon iconLiteral="fas-bed" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="sofasButton" text="Sofas" styleClass="sidebar-button" onAction="#showSofas">
+                <graphic>
+                    <FontIcon iconLiteral="fas-couch" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="tablesButton" text="Tables" styleClass="sidebar-button" onAction="#showTables">
+                <graphic>
+                    <FontIcon iconLiteral="fas-table" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="miscButton" text="Miscellaneous" styleClass="sidebar-button" onAction="#showMisc">
+                <graphic>
+                    <FontIcon iconLiteral="fas-boxes" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="suppliersButton" text="Suppliers" styleClass="sidebar-button" onAction="#showSuppliers">
+                <graphic>
+                    <FontIcon iconLiteral="fas-truck" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="customersButton" text="Customers" styleClass="sidebar-button" onAction="#showCustomers">
+                <graphic>
+                    <FontIcon iconLiteral="fas-users" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Button fx:id="ordersButton" text="Orders" styleClass="sidebar-button" onAction="#showOrders">
+                <graphic>
+                    <FontIcon iconLiteral="fas-shopping-cart" iconSize="16"/>
+                </graphic>
+            </Button>
+            <Region VBox.vgrow="ALWAYS" />
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Content will be loaded here dynamically -->
+        </StackPane>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar">
+            <Label fx:id="statusLabel" text="Ready" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="versionLabel" text="v1.0.0" />
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

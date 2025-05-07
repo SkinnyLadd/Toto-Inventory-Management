@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.DashboardController" fitToWidth="true" styleClass="content-area">
+    <VBox spacing="20">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <Label text="Dashboard" styleClass="section-title">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+        
+        <!-- Summary Tiles -->
+        <HBox spacing="20">
+            <!-- Total Furniture Tile -->
+            <VBox styleClass="dashboard-tile">
+                <HBox spacing="10">
+                    <FontIcon iconLiteral="fas-couch" styleClass="dashboard-tile-icon"/>
+                    <VBox>
+                        <Label text="Total Furniture" styleClass="dashboard-tile-title"/>
+                        <Label fx:id="totalFurnitureLabel" text="0" styleClass="dashboard-tile-value"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Chairs Tile -->
+            <VBox styleClass="dashboard-tile">
+                <HBox spacing="10">
+                    <FontIcon iconLiteral="fas-chair" styleClass="dashboard-tile-icon"/>
+                    <VBox>
+                        <Label text="Chairs" styleClass="dashboard-tile-title"/>
+                        <Label fx:id="chairsCountLabel" text="0" styleClass="dashboard-tile-value"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Beds Tile -->
+            <VBox styleClass="dashboard-tile">
+                <HBox spacing="10">
+                    <FontIcon iconLiteral="fas-bed" styleClass="dashboard-tile-icon"/>
+                    <VBox>
+                        <Label text="Beds" styleClass="dashboard-tile-title"/>
+                        <Label fx:id="bedsCountLabel" text="0" styleClass="dashboard-tile-value"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Sofas Tile -->
+            <VBox styleClass="dashboard-tile">
+                <HBox spacing="10">
+                    <FontIcon iconLiteral="fas-couch" styleClass="dashboard-tile-icon"/>
+                    <VBox>
+                        <Label text="Sofas" styleClass="dashboard-tile-title"/>
+                        <Label fx:id="sofasCountLabel" text="0" styleClass="dashboard-tile-value"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </HBox>
+        
+        <!-- Recent Items Section -->
+        <Label text="Recent Items" styleClass="section-title">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Label>
+        
+        <TableView fx:id="recentItemsTable" prefHeight="200">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="typeColumn" text="Type" prefWidth="100"/>
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
+                <TableColumn fx:id="materialColumn" text="Material" prefWidth="120"/>
+                <TableColumn fx:id="manufacturerColumn" text="Manufacturer" prefWidth="150"/>
+            </columns>
+        </TableView>
+        
+        <!-- Quick Actions Section -->
+        <Label text="Quick Actions" styleClass="section-title">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Label>
+        
+        <HBox spacing="10">
+            <Button fx:id="addFurnitureButton" text="Add Furniture" onAction="#handleAddFurniture">
+                <graphic>
+                    <FontIcon iconLiteral="fas-plus" iconSize="12"/>
+                </graphic>
+            </Button>
+            <Button fx:id="generateReportButton" text="Generate Report" onAction="#handleGenerateReport">
+                <graphic>
+                    <FontIcon iconLiteral="fas-file-alt" iconSize="12"/>
+                </graphic>
+            </Button>
+            <Button fx:id="refreshButton" text="Refresh Data" onAction="#handleRefresh">
+                <graphic>
+                    <FontIcon iconLiteral="fas-sync" iconSize="12"/>
+                </graphic>
+            </Button>
+        </HBox>
+    </VBox>
+</ScrollPane>

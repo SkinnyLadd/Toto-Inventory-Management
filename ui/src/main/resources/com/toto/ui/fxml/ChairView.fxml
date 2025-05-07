@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.ChairViewController" styleClass="content-area">
+    <top>
+        <VBox spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="Chairs" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="24.0"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="addChairButton" text="Add Chair" onAction="#handleAddChair">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-plus" iconSize="12"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="refreshButton" text="Refresh" onAction="#handleRefresh">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sync" iconSize="12"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search chairs..." prefWidth="300" />
+                <Button fx:id="searchButton" text="Search" onAction="#handleSearch">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-search" iconSize="12"/>
+                    </graphic>
+                </Button>
+                <ComboBox fx:id="filterComboBox" promptText="Filter by..." prefWidth="150" />
+            </HBox>
+            
+            <padding>
+                <Insets top="20" right="20" bottom="10" left="20"/>
+            </padding>
+        </VBox>
+    </top>
+    
+    <center>
+        <TableView fx:id="chairsTable" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="80"/>
+                <TableColumn fx:id="materialColumn" text="Material" prefWidth="100"/>
+                <TableColumn fx:id="manufacturerColumn" text="Manufacturer" prefWidth="120"/>
+                <TableColumn fx:id="seatingCapacityColumn" text="Seating Capacity" prefWidth="120"/>
+                <TableColumn fx:id="hasArmrestsColumn" text="Has Armrests" prefWidth="100"/>
+                <TableColumn fx:id="chairStyleColumn" text="Style" prefWidth="100"/>
+                <TableColumn fx:id="isAdjustableColumn" text="Adjustable" prefWidth="80"/>
+                <TableColumn fx:id="hasWheelsColumn" text="Has Wheels" prefWidth="80"/>
+                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="120"/>
+            </columns>
+            <padding>
+                <Insets top="0" right="20" bottom="0" left="20"/>
+            </padding>
+        </TableView>
+    </center>
+    
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Label fx:id="totalItemsLabel" text="Total Items: 0" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Pagination fx:id="pagination" pageCount="1" maxPageIndicatorCount="5" />
+            <padding>
+                <Insets top="10" right="20" bottom="20" left="20"/>
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

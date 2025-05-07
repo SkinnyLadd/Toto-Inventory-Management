@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.toto.ui.MainController">
+
     <top>
-        <Label text="Furniture Inventory" styleClass="header" BorderPane.alignment="CENTER"/>
+        <Label text="Furniture Inventory"
+               styleClass="header"
+               BorderPane.alignment="CENTER"/>
     </top>
+
     <center>
-        <TableView fx:id="furnitureTable" prefHeight="400" prefWidth="600"/>
+        <TableView fx:id="furnitureTable"
+                   prefHeight="400"
+                   prefWidth="600"/>
     </center>
+
     <bottom>
         <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="addButton" text="Add Furniture"/>
+            <Button fx:id="addButton"    text="Add Furniture"/>
             <Button fx:id="deleteButton" text="Delete Furniture"/>
             <Button fx:id="refreshButton" text="Refresh"/>
         </HBox>

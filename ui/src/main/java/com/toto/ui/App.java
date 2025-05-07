@@ -46,7 +46,7 @@ public class App extends Application {
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/toto/ui/fxml/MainLayout.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
 
