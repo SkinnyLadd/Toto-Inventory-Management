@@ -1,7 +1,7 @@
 package com.toto.ui;
 
-import com.toto.backend.entities.Chair;
-import com.toto.backend.services.interfaces.IChairService;
+import com.toto.backend.entities.Sofa;
+import com.toto.backend.services.interfaces.ISofaService;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,8 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,33 +20,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ChairViewController {
+public class SofaViewController {
 
     @Autowired
-    private IChairService chairService;
+    private ISofaService sofaService;
 
-    @FXML private TableView<Chair> chairsTable;
-    @FXML private TableColumn<Chair, Long> idColumn;
-    @FXML private TableColumn<Chair, String> nameColumn;
-    @FXML private TableColumn<Chair, Double> priceColumn;
-    @FXML private TableColumn<Chair, String> materialColumn;
-    @FXML private TableColumn<Chair, String> manufacturerColumn;
-    @FXML private TableColumn<Chair, Integer> seatingCapacityColumn;
-    @FXML private TableColumn<Chair, Boolean> hasArmrestsColumn;
-    @FXML private TableColumn<Chair, String> chairStyleColumn;
-    @FXML private TableColumn<Chair, Boolean> isAdjustableColumn;
-    @FXML private TableColumn<Chair, Boolean> hasWheelsColumn;
-    @FXML private TableColumn<Chair, Void> actionsColumn;
+    @FXML private TableView<Sofa> sofasTable;
+    @FXML private TableColumn<Sofa, Long> idColumn;
+    @FXML private TableColumn<Sofa, String> nameColumn;
+    @FXML private TableColumn<Sofa, Double> priceColumn;
+    @FXML private TableColumn<Sofa, String> materialColumn;
+    @FXML private TableColumn<Sofa, String> manufacturerColumn;
+    @FXML private TableColumn<Sofa, Integer> seatingCapacityColumn;
+    @FXML private TableColumn<Sofa, Boolean> isConvertibleColumn;
+    @FXML private TableColumn<Sofa, String> upholsteryTypeColumn;
+    @FXML private TableColumn<Sofa, Integer> numberOfCushionsColumn;
+    @FXML private TableColumn<Sofa, Boolean> hasReclinersColumn;
+    @FXML private TableColumn<Sofa, Void> actionsColumn;
 
     @FXML private TextField searchField;
     @FXML private ComboBox<String> filterComboBox;
-    @FXML private Button addChairButton;
+    @FXML private Button addSofaButton;
     @FXML private Button searchButton;
     @FXML private Button refreshButton;
     @FXML private Label totalItemsLabel;
     @FXML private Pagination pagination;
 
-    private ObservableList<Chair> chairsList = FXCollections.observableArrayList();
+    private ObservableList<Sofa> sofasList = FXCollections.observableArrayList();
     private static final int ITEMS_PER_PAGE = 10;
 
     @FXML
@@ -66,30 +66,30 @@ public class ChairViewController {
         materialColumn.setCellValueFactory(new PropertyValueFactory<>("material"));
         manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
 
-        // Chair-specific columns
+        // Sofa-specific columns
         seatingCapacityColumn.setCellValueFactory(cellData -> 
             new SimpleIntegerProperty(cellData.getValue().getSeatingCapacity()).asObject());
 
-        hasArmrestsColumn.setCellValueFactory(cellData -> 
-            new SimpleBooleanProperty(cellData.getValue().isHasArmrests()));
+        isConvertibleColumn.setCellValueFactory(cellData -> 
+            new SimpleBooleanProperty(cellData.getValue().isConvertible()));
 
-        chairStyleColumn.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(cellData.getValue().getChairStyle()));
+        upholsteryTypeColumn.setCellValueFactory(cellData -> 
+            new SimpleStringProperty(cellData.getValue().getUpholsteryType()));
 
-        isAdjustableColumn.setCellValueFactory(cellData -> 
-            new SimpleBooleanProperty(cellData.getValue().isAdjustable()));
+        numberOfCushionsColumn.setCellValueFactory(cellData -> 
+            new SimpleIntegerProperty(cellData.getValue().getNumberOfCushions()).asObject());
 
-        hasWheelsColumn.setCellValueFactory(cellData -> 
-            new SimpleBooleanProperty(cellData.getValue().isHasWheels()));
+        hasReclinersColumn.setCellValueFactory(cellData -> 
+            new SimpleBooleanProperty(cellData.getValue().isHasRecliners()));
 
         // Setup actions column with edit and delete buttons
         setupActionsColumn();
     }
 
     private void setupActionsColumn() {
-        Callback<TableColumn<Chair, Void>, TableCell<Chair, Void>> cellFactory = new Callback<>() {
+        Callback<TableColumn<Sofa, Void>, TableCell<Sofa, Void>> cellFactory = new Callback<>() {
             @Override
-            public TableCell<Chair, Void> call(final TableColumn<Chair, Void> param) {
+            public TableCell<Sofa, Void> call(final TableColumn<Sofa, Void> param) {
                 return new TableCell<>() {
                     private final Button editButton = new Button("Edit");
                     private final Button deleteButton = new Button("Delete");
@@ -100,13 +100,13 @@ public class ChairViewController {
                         deleteButton.getStyleClass().add("small-button");
 
                         editButton.setOnAction(event -> {
-                            Chair chair = getTableView().getItems().get(getIndex());
-                            handleEditChair(chair);
+                            Sofa sofa = getTableView().getItems().get(getIndex());
+                            handleEditSofa(sofa);
                         });
 
                         deleteButton.setOnAction(event -> {
-                            Chair chair = getTableView().getItems().get(getIndex());
-                            handleDeleteChair(chair);
+                            Sofa sofa = getTableView().getItems().get(getIndex());
+                            handleDeleteSofa(sofa);
                         });
                     }
 
@@ -129,39 +129,37 @@ public class ChairViewController {
     private void setupFilterComboBox() {
         filterComboBox.getItems().addAll(
             "All",
-            "Has Armrests",
-            "No Armrests",
-            "Adjustable",
-            "Non-Adjustable",
-            "With Wheels",
-            "Without Wheels"
+            "Convertible",
+            "Non-Convertible",
+            "Has Recliners",
+            "No Recliners"
         );
         filterComboBox.setValue("All");
 
         filterComboBox.setOnAction(e -> applyFilter());
     }
 
-    private TableView<Chair> createPage(int pageIndex) {
+    private TableView<Sofa> createPage(int pageIndex) {
         int fromIndex = pageIndex * ITEMS_PER_PAGE;
-        int toIndex = Math.min(fromIndex + ITEMS_PER_PAGE, chairsList.size());
+        int toIndex = Math.min(fromIndex + ITEMS_PER_PAGE, sofasList.size());
 
-        chairsTable.setItems(FXCollections.observableArrayList(
-            chairsList.subList(fromIndex, toIndex)));
+        sofasTable.setItems(FXCollections.observableArrayList(
+            sofasList.subList(fromIndex, toIndex)));
 
-        return chairsTable;
+        return sofasTable;
     }
 
     @FXML
-    public void handleAddChair() {
+    public void handleAddSofa() {
         try {
             // Load the dialog FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/toto/ui/fxml/AddChairDialog.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/toto/ui/fxml/AddSofaDialog.fxml"));
             DialogPane dialogPane = loader.load();
 
             // Create the dialog
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(dialogPane);
-            dialog.setTitle("Add New Chair");
+            dialog.setTitle("Add New Sofa");
 
             // Get references to the form fields
             TextField nameField = (TextField) dialogPane.lookup("#nameField");
@@ -170,14 +168,17 @@ public class ChairViewController {
             TextField manufacturerField = (TextField) dialogPane.lookup("#manufacturerField");
             ComboBox<String> woodTypeComboBox = (ComboBox<String>) dialogPane.lookup("#woodTypeComboBox");
             Spinner<Integer> seatingCapacitySpinner = (Spinner<Integer>) dialogPane.lookup("#seatingCapacitySpinner");
-            CheckBox hasArmrestsCheckBox = (CheckBox) dialogPane.lookup("#hasArmrestsCheckBox");
-            ComboBox<String> chairStyleComboBox = (ComboBox<String>) dialogPane.lookup("#chairStyleComboBox");
-            CheckBox isAdjustableCheckBox = (CheckBox) dialogPane.lookup("#isAdjustableCheckBox");
-            CheckBox hasWheelsCheckBox = (CheckBox) dialogPane.lookup("#hasWheelsCheckBox");
+            CheckBox isConvertibleCheckBox = (CheckBox) dialogPane.lookup("#isConvertibleCheckBox");
+            ComboBox<String> upholsteryTypeComboBox = (ComboBox<String>) dialogPane.lookup("#upholsteryTypeComboBox");
+            Spinner<Integer> numberOfCushionsSpinner = (Spinner<Integer>) dialogPane.lookup("#numberOfCushionsSpinner");
+            CheckBox hasReclinersCheckBox = (CheckBox) dialogPane.lookup("#hasReclinersCheckBox");
 
-            // Configure the spinner
-            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1);
-            seatingCapacitySpinner.setValueFactory(valueFactory);
+            // Configure the spinners
+            SpinnerValueFactory<Integer> seatingValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 3);
+            seatingCapacitySpinner.setValueFactory(seatingValueFactory);
+
+            SpinnerValueFactory<Integer> cushionsValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 4);
+            numberOfCushionsSpinner.setValueFactory(cushionsValueFactory);
 
             // Populate the wood type combo box with enum values
             woodTypeComboBox.getItems().addAll(
@@ -196,50 +197,52 @@ public class ChairViewController {
             );
             woodTypeComboBox.setValue("OAK");
 
-            // Populate the chair style combo box
-            chairStyleComboBox.getItems().addAll("Dining", "Office", "Rocking", "Folding", "Lounge", "Bar", "Other");
-            chairStyleComboBox.setValue("Dining");
+            // Populate the upholstery type combo box
+            upholsteryTypeComboBox.getItems().addAll(
+                "Leather", "Fabric", "Microfiber", "Velvet", "Linen", "Cotton", "Other"
+            );
+            upholsteryTypeComboBox.setValue("Fabric");
 
             // Show the dialog and wait for the user response
             Optional<ButtonType> result = dialog.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                // Create a new Chair object with the form data
-                Chair newChair = new Chair();
-                newChair.setName(nameField.getText());
-                newChair.setPrice(Double.parseDouble(priceField.getText()));
-                newChair.setMaterial(materialField.getText());
-                newChair.setManufacturer(manufacturerField.getText());
+                // Create a new Sofa object with the form data
+                Sofa newSofa = new Sofa();
+                newSofa.setName(nameField.getText());
+                newSofa.setPrice(Double.parseDouble(priceField.getText()));
+                newSofa.setMaterial(materialField.getText());
+                newSofa.setManufacturer(manufacturerField.getText());
 
                 // Set the wood type enum
-                newChair.setWoodType(com.toto.backend.entities.enums.WoodType.valueOf(woodTypeComboBox.getValue()));
+                newSofa.setWoodType(com.toto.backend.entities.enums.WoodType.valueOf(woodTypeComboBox.getValue()));
 
-                // Set chair-specific properties
-                newChair.setSeatingCapacity(seatingCapacitySpinner.getValue());
-                newChair.setHasArmrests(hasArmrestsCheckBox.isSelected());
-                newChair.setChairStyle(chairStyleComboBox.getValue());
-                newChair.setAdjustable(isAdjustableCheckBox.isSelected());
-                newChair.setHasWheels(hasWheelsCheckBox.isSelected());
+                // Set sofa-specific properties
+                newSofa.setSeatingCapacity(seatingCapacitySpinner.getValue());
+                newSofa.setConvertible(isConvertibleCheckBox.isSelected());
+                newSofa.setUpholsteryType(upholsteryTypeComboBox.getValue());
+                newSofa.setNumberOfCushions(numberOfCushionsSpinner.getValue());
+                newSofa.setHasRecliners(hasReclinersCheckBox.isSelected());
 
-                // Save the new chair to the database
-                chairService.save(newChair);
+                // Save the new sofa to the database
+                sofaService.save(newSofa);
 
-                // Refresh the table to show the new chair
+                // Refresh the table to show the new sofa
                 refreshData();
 
                 // Show success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Chair Added");
-                alert.setContentText("The chair has been added successfully.");
+                alert.setHeaderText("Sofa Added");
+                alert.setContentText("The sofa has been added successfully.");
                 alert.showAndWait();
             }
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Add Chair Error");
-            alert.setContentText("An error occurred while adding the chair: " + e.getMessage());
+            alert.setHeaderText("Add Sofa Error");
+            alert.setContentText("An error occurred while adding the sofa: " + e.getMessage());
             alert.showAndWait();
         }
     }
@@ -257,47 +260,46 @@ public class ChairViewController {
             return;
         }
 
-        List<Chair> allChairs = chairService.findAll();
-        ObservableList<Chair> filteredList = FXCollections.observableArrayList();
+        List<Sofa> allSofas = sofaService.findAll();
+        ObservableList<Sofa> filteredList = FXCollections.observableArrayList();
 
-        for (Chair chair : allChairs) {
-            if (chair.getName().toLowerCase().contains(searchTerm) ||
-                chair.getManufacturer().toLowerCase().contains(searchTerm) ||
-                chair.getMaterial().toLowerCase().contains(searchTerm) ||
-                chair.getChairStyle().toLowerCase().contains(searchTerm)) {
-                filteredList.add(chair);
+        for (Sofa sofa : allSofas) {
+            if (sofa.getName().toLowerCase().contains(searchTerm) ||
+                sofa.getManufacturer().toLowerCase().contains(searchTerm) ||
+                sofa.getMaterial().toLowerCase().contains(searchTerm) ||
+                sofa.getUpholsteryType().toLowerCase().contains(searchTerm)) {
+                filteredList.add(sofa);
             }
         }
 
         updateTableWithData(filteredList);
     }
 
-    private void handleEditChair(Chair chair) {
-        // This would typically open a dialog to edit the chair
-        // For now, we'll just show an alert
+    private void handleEditSofa(Sofa sofa) {
+        // This will be implemented later
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Edit Chair");
-        alert.setHeaderText("Edit Chair Feature");
-        alert.setContentText("This feature would open a dialog to edit chair: " + chair.getName());
+        alert.setTitle("Edit Sofa");
+        alert.setHeaderText("Edit Sofa Feature");
+        alert.setContentText("This feature would open a dialog to edit sofa: " + sofa.getName());
         alert.showAndWait();
     }
 
-    private void handleDeleteChair(Chair chair) {
+    private void handleDeleteSofa(Sofa sofa) {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDialog.setTitle("Confirm Delete");
-        confirmDialog.setHeaderText("Delete Chair");
-        confirmDialog.setContentText("Are you sure you want to delete chair: " + chair.getName() + "?");
+        confirmDialog.setHeaderText("Delete Sofa");
+        confirmDialog.setContentText("Are you sure you want to delete sofa: " + sofa.getName() + "?");
 
         Optional<ButtonType> result = confirmDialog.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                chairService.deleteById(chair.getId());
+                sofaService.deleteById(sofa.getId());
                 refreshData();
             } catch (Exception e) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Error");
                 errorAlert.setHeaderText("Delete Error");
-                errorAlert.setContentText("An error occurred while deleting the chair: " + e.getMessage());
+                errorAlert.setContentText("An error occurred while deleting the sofa: " + e.getMessage());
                 errorAlert.showAndWait();
             }
         }
@@ -310,22 +312,20 @@ public class ChairViewController {
             return;
         }
 
-        List<Chair> allChairs = chairService.findAll();
-        ObservableList<Chair> filteredList = FXCollections.observableArrayList();
+        List<Sofa> allSofas = sofaService.findAll();
+        ObservableList<Sofa> filteredList = FXCollections.observableArrayList();
 
-        for (Chair chair : allChairs) {
+        for (Sofa sofa : allSofas) {
             boolean include = switch (filter) {
-                case "Has Armrests" -> chair.isHasArmrests();
-                case "No Armrests" -> !chair.isHasArmrests();
-                case "Adjustable" -> chair.isAdjustable();
-                case "Non-Adjustable" -> !chair.isAdjustable();
-                case "With Wheels" -> chair.isHasWheels();
-                case "Without Wheels" -> !chair.isHasWheels();
+                case "Convertible" -> sofa.isConvertible();
+                case "Non-Convertible" -> !sofa.isConvertible();
+                case "Has Recliners" -> sofa.isHasRecliners();
+                case "No Recliners" -> !sofa.isHasRecliners();
                 default -> true;
             };
 
             if (include) {
-                filteredList.add(chair);
+                filteredList.add(sofa);
             }
         }
 
@@ -334,8 +334,8 @@ public class ChairViewController {
 
     private void refreshData() {
         try {
-            List<Chair> chairs = chairService.findAll();
-            updateTableWithData(FXCollections.observableArrayList(chairs));
+            List<Sofa> sofas = sofaService.findAll();
+            updateTableWithData(FXCollections.observableArrayList(sofas));
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -346,14 +346,14 @@ public class ChairViewController {
         }
     }
 
-    private void updateTableWithData(ObservableList<Chair> chairs) {
-        this.chairsList = chairs;
+    private void updateTableWithData(ObservableList<Sofa> sofas) {
+        this.sofasList = sofas;
 
-        int pageCount = (chairs.size() + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE;
+        int pageCount = (sofas.size() + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE;
         pagination.setPageCount(pageCount == 0 ? 1 : pageCount);
         pagination.setCurrentPageIndex(0);
         createPage(0);
 
-        totalItemsLabel.setText("Total Items: " + chairs.size());
+        totalItemsLabel.setText("Total Items: " + sofas.size());
     }
 }

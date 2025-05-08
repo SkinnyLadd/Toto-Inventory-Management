@@ -10,5 +10,6 @@ public enum WoodType {
     WALNUT,
     TEAK,
     MDF,
-    LAMINATE
+    LAMINATE,
+    OAK
 }

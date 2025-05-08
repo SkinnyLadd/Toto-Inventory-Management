@@ -4,7 +4,7 @@ import com.toto.backend.entities.MiscFurniture;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Button;
-import com.toto.backend.services.FurnitureService;
+import com.toto.backend.services.interfaces.IFurnitureService;
 import com.toto.backend.entities.Furniture;
 import com.toto.backend.entities.Chair;
 import javafx.collections.FXCollections;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class MainController {
 
     @Autowired
-    private FurnitureService furnitureService;
+    private IFurnitureService furnitureService;
 
     @FXML private TableView<Furniture> furnitureTable;
     @FXML private Button addButton;

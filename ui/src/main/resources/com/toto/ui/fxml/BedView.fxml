@@ -3,18 +3,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.BedViewController" styleClass="content-area">
     <top>
         <VBox spacing="10">
             <HBox alignment="CENTER_LEFT" spacing="20">
-                <Label text="Beds" styleClass="section-title">
-                    <font>
-                        <Font name="System Bold" size="24.0"/>
-                    </font>
-                </Label>
+                <Label text="Beds" styleClass="section-title"/>
                 <Region HBox.hgrow="ALWAYS" />
                 <Button fx:id="addBedButton" text="Add Bed" onAction="#handleAddBed">
                     <graphic>
@@ -27,7 +22,7 @@
                     </graphic>
                 </Button>
             </HBox>
-            
+
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <TextField fx:id="searchField" promptText="Search beds..." prefWidth="300" />
                 <Button fx:id="searchButton" text="Search" onAction="#handleSearch">
@@ -37,13 +32,13 @@
                 </Button>
                 <ComboBox fx:id="filterComboBox" promptText="Filter by..." prefWidth="150" />
             </HBox>
-            
+
             <padding>
                 <Insets top="20" right="20" bottom="10" left="20"/>
             </padding>
         </VBox>
     </top>
-    
+
     <center>
         <TableView fx:id="bedsTable" BorderPane.alignment="CENTER">
             <columns>
@@ -65,7 +60,7 @@
             </padding>
         </TableView>
     </center>
-    
+
     <bottom>
         <HBox alignment="CENTER_RIGHT" spacing="10">
             <Label fx:id="totalItemsLabel" text="Total Items: 0" />

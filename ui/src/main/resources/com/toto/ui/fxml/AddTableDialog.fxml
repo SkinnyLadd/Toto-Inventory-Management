@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<DialogPane xmlns:fx="http://javafx.com/fxml" styleClass="dialog-pane">
+    <content>
+        <GridPane hgap="10" vgap="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Common Furniture Properties -->
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+            
+            <Label text="Price:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <TextField fx:id="priceField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+            
+            <Label text="Material:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <TextField fx:id="materialField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            
+            <Label text="Manufacturer:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+            <TextField fx:id="manufacturerField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            
+            <Label text="Wood Type:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+            <ComboBox fx:id="woodTypeComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+            
+            <!-- Table-specific Properties -->
+            <Label text="Shape:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+            <ComboBox fx:id="shapeComboBox" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+            
+            <Label text="Seating Capacity:" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+            <Spinner fx:id="seatingCapacitySpinner" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+            
+            <Label text="Is Extendable:" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+            <CheckBox fx:id="isExtendableCheckBox" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+            
+            <Label text="Length (cm):" GridPane.rowIndex="8" GridPane.columnIndex="0" />
+            <TextField fx:id="lengthField" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+            
+            <Label text="Width (cm):" GridPane.rowIndex="9" GridPane.columnIndex="0" />
+            <TextField fx:id="widthField" GridPane.rowIndex="9" GridPane.columnIndex="1" />
+            
+            <Label text="Height (cm):" GridPane.rowIndex="10" GridPane.columnIndex="0" />
+            <TextField fx:id="heightField" GridPane.rowIndex="10" GridPane.columnIndex="1" />
+            
+            <Label text="Has Glass Top:" GridPane.rowIndex="11" GridPane.columnIndex="0" />
+            <CheckBox fx:id="hasGlassTopCheckBox" GridPane.rowIndex="11" GridPane.columnIndex="1" />
+        </GridPane>
+    </content>
+    
+    <buttonTypes>
+        <ButtonType fx:constant="OK" />
+        <ButtonType fx:constant="CANCEL" />
+    </buttonTypes>
+</DialogPane>

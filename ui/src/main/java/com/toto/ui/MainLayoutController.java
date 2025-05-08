@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -27,6 +28,13 @@ public class MainLayoutController {
     @FXML private Label statusLabel;
     @FXML private Label versionLabel;
 
+    private final ApplicationContext applicationContext;  // <-- add this
+
+    // Constructor injection of the Spring context
+    public MainLayoutController(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
     @FXML
     public void initialize() {
         // Set the initial view to dashboard
@@ -35,61 +43,62 @@ public class MainLayoutController {
 
     @FXML
     public void showDashboard() {
-        loadView("/fxml/Dashboard.fxml");
+        loadView("/com/toto/ui/fxml/Dashboard.fxml");
         updateStatus("Dashboard");
     }
 
     @FXML
     public void showChairs() {
-        loadView("/fxml/ChairView.fxml");
+        loadView("/com/toto/ui/fxml/ChairView.fxml");
         updateStatus("Chairs");
     }
 
     @FXML
     public void showBeds() {
-        loadView("/fxml/BedView.fxml");
+        loadView("/com/toto/ui/fxml/BedView.fxml");
         updateStatus("Beds");
     }
 
     @FXML
     public void showSofas() {
-        loadView("/fxml/SofaView.fxml");
+        loadView("/com/toto/ui/fxml/SofaView.fxml");
         updateStatus("Sofas");
     }
 
     @FXML
     public void showTables() {
-        loadView("/fxml/TableView.fxml");
+        loadView("/com/toto/ui/fxml/TableView.fxml");
         updateStatus("Tables");
     }
 
     @FXML
     public void showMisc() {
-        loadView("/fxml/MiscView.fxml");
+        loadView("/com/toto/ui/fxml/MiscView.fxml");
         updateStatus("Miscellaneous Furniture");
     }
 
     @FXML
     public void showSuppliers() {
-        loadView("/fxml/SupplierView.fxml");
+        loadView("/com/toto/ui/fxml/SupplierView.fxml");
         updateStatus("Suppliers");
     }
 
     @FXML
     public void showCustomers() {
-        loadView("/fxml/CustomerView.fxml");
+        loadView("/com/toto/ui/fxml/CustomerView.fxml");
         updateStatus("Customers");
     }
 
     @FXML
     public void showOrders() {
-        loadView("/fxml/OrderView.fxml");
+        loadView("/com/toto/ui/fxml/OrderView.fxml");
         updateStatus("Orders");
     }
 
     private void loadView(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(applicationContext::getBean);
             Parent view = loader.load();
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);

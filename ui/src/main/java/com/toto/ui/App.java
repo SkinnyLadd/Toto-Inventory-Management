@@ -23,13 +23,17 @@ public class App extends Application {
     public void init() {
         try {
             // Configure Spring Boot to NOT start as a web application
-            context = new SpringApplicationBuilder(BackendApplication.class)
+            context = new SpringApplicationBuilder()
+                    .sources(BackendApplication.class)
                     .sources(
                             MainLayoutController.class,
                             MainController.class,
                             DashboardController.class,
                             ChairViewController.class,
-                            BedViewController.class
+                            BedViewController.class,
+                            SofaViewController.class,
+                            TablesViewController.class,
+                            MiscFurnitureViewController.class
                     )
                     .web(WebApplicationType.NONE) // Important - don't start as web app
                     .headless(false) // Not headless since we're running a UI app

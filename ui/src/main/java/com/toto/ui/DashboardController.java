@@ -1,11 +1,11 @@
 package com.toto.ui;
 
 import com.toto.backend.entities.Furniture;
-import com.toto.backend.services.FurnitureService;
-import com.toto.backend.services.ChairService;
-import com.toto.backend.services.BedService;
-import com.toto.backend.services.SofaService;
-import com.toto.backend.services.TablesService;
+import com.toto.backend.services.interfaces.IFurnitureService;
+import com.toto.backend.services.interfaces.IChairService;
+import com.toto.backend.services.interfaces.IBedService;
+import com.toto.backend.services.interfaces.ISofaService;
+import com.toto.backend.services.interfaces.ITablesService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,25 +22,25 @@ import java.util.stream.Collectors;
 public class DashboardController {
 
     @Autowired
-    private FurnitureService furnitureService;
-    
+    private IFurnitureService furnitureService;
+
     @Autowired
-    private ChairService chairService;
-    
+    private IChairService chairService;
+
     @Autowired
-    private BedService bedService;
-    
+    private IBedService bedService;
+
     @Autowired
-    private SofaService sofaService;
-    
+    private ISofaService sofaService;
+
     @Autowired
-    private TablesService tablesService;
+    private ITablesService tablesService;
 
     @FXML private Label totalFurnitureLabel;
     @FXML private Label chairsCountLabel;
     @FXML private Label bedsCountLabel;
     @FXML private Label sofasCountLabel;
-    
+
     @FXML private TableView<Furniture> recentItemsTable;
     @FXML private TableColumn<Furniture, Long> idColumn;
     @FXML private TableColumn<Furniture, String> nameColumn;
@@ -48,7 +48,7 @@ public class DashboardController {
     @FXML private TableColumn<Furniture, Double> priceColumn;
     @FXML private TableColumn<Furniture, String> materialColumn;
     @FXML private TableColumn<Furniture, String> manufacturerColumn;
-    
+
     @FXML private Button addFurnitureButton;
     @FXML private Button generateReportButton;
     @FXML private Button refreshButton;
@@ -58,7 +58,7 @@ public class DashboardController {
         setupTableColumns();
         refreshData();
     }
-    
+
     private void setupTableColumns() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -71,7 +71,7 @@ public class DashboardController {
         materialColumn.setCellValueFactory(new PropertyValueFactory<>("material"));
         manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
     }
-    
+
     @FXML
     public void handleAddFurniture() {
         // This would typically open a dialog to add new furniture
@@ -82,7 +82,7 @@ public class DashboardController {
         alert.setContentText("This feature would open a dialog to add new furniture.");
         alert.showAndWait();
     }
-    
+
     @FXML
     public void handleGenerateReport() {
         // This would typically generate a report
@@ -93,27 +93,27 @@ public class DashboardController {
         alert.setContentText("This feature would generate a report of the furniture inventory.");
         alert.showAndWait();
     }
-    
+
     @FXML
     public void handleRefresh() {
         refreshData();
     }
-    
+
     private void refreshData() {
         try {
             // Update counts
             List<Furniture> allFurniture = furnitureService.findAll();
             totalFurnitureLabel.setText(String.valueOf(allFurniture.size()));
-            
+
             chairsCountLabel.setText(String.valueOf(chairService.findAll().size()));
             bedsCountLabel.setText(String.valueOf(bedService.findAll().size()));
             sofasCountLabel.setText(String.valueOf(sofaService.findAll().size()));
-            
+
             // Get recent items (limited to 10)
             List<Furniture> recentItems = allFurniture.stream()
                     .limit(10)
                     .collect(Collectors.toList());
-            
+
             ObservableList<Furniture> items = FXCollections.observableArrayList(recentItems);
             recentItemsTable.setItems(items);
         } catch (Exception e) {

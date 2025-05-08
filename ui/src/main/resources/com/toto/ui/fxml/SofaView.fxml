@@ -5,13 +5,13 @@
 <?import javafx.geometry.Insets?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.ChairViewController" styleClass="content-area">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.SofaViewController" styleClass="content-area">
     <top>
         <VBox spacing="10">
             <HBox alignment="CENTER_LEFT" spacing="20">
-                <Label text="Chairs" styleClass="section-title"/>
+                <Label text="Sofas" styleClass="section-title"/>
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="addChairButton" text="Add Chair" onAction="#handleAddChair">
+                <Button fx:id="addSofaButton" text="Add Sofa" onAction="#handleAddSofa">
                     <graphic>
                         <FontIcon iconLiteral="fas-plus" iconSize="12"/>
                     </graphic>
@@ -24,7 +24,7 @@
             </HBox>
 
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" promptText="Search chairs..." prefWidth="300" />
+                <TextField fx:id="searchField" promptText="Search sofas..." prefWidth="300" />
                 <Button fx:id="searchButton" text="Search" onAction="#handleSearch">
                     <graphic>
                         <FontIcon iconLiteral="fas-search" iconSize="12"/>
@@ -40,7 +40,7 @@
     </top>
 
     <center>
-        <TableView fx:id="chairsTable" BorderPane.alignment="CENTER">
+        <TableView fx:id="sofasTable" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
@@ -48,10 +48,10 @@
                 <TableColumn fx:id="materialColumn" text="Material" prefWidth="100"/>
                 <TableColumn fx:id="manufacturerColumn" text="Manufacturer" prefWidth="120"/>
                 <TableColumn fx:id="seatingCapacityColumn" text="Seating Capacity" prefWidth="120"/>
-                <TableColumn fx:id="hasArmrestsColumn" text="Has Armrests" prefWidth="100"/>
-                <TableColumn fx:id="chairStyleColumn" text="Style" prefWidth="100"/>
-                <TableColumn fx:id="isAdjustableColumn" text="Adjustable" prefWidth="80"/>
-                <TableColumn fx:id="hasWheelsColumn" text="Has Wheels" prefWidth="80"/>
+                <TableColumn fx:id="isConvertibleColumn" text="Convertible" prefWidth="80"/>
+                <TableColumn fx:id="upholsteryTypeColumn" text="Upholstery" prefWidth="100"/>
+                <TableColumn fx:id="numberOfCushionsColumn" text="Cushions" prefWidth="80"/>
+                <TableColumn fx:id="hasReclinersColumn" text="Has Recliners" prefWidth="100"/>
                 <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="120"/>
             </columns>
             <padding>

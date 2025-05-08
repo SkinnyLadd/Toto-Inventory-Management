@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<DialogPane xmlns:fx="http://javafx.com/fxml" styleClass="dialog-pane">
+    <content>
+        <GridPane hgap="10" vgap="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Common Furniture Properties -->
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+            
+            <Label text="Price:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <TextField fx:id="priceField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+            
+            <Label text="Material:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <TextField fx:id="materialField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            
+            <Label text="Manufacturer:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+            <TextField fx:id="manufacturerField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            
+            <Label text="Wood Type:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+            <ComboBox fx:id="woodTypeComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+            
+            <!-- MiscFurniture-specific Properties -->
+            <Label text="Category:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+            <ComboBox fx:id="categoryComboBox" editable="true" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+            
+            <Label text="Description:" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+            <TextArea fx:id="descriptionTextArea" prefHeight="100" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+            
+            <Label text="Custom Attributes:" GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.valignment="TOP" />
+            <VBox spacing="5" GridPane.rowIndex="7" GridPane.columnIndex="1">
+                <HBox spacing="5">
+                    <TextField fx:id="attributeNameField" promptText="Attribute Name" prefWidth="150" />
+                    <TextField fx:id="attributeValueField" promptText="Attribute Value" prefWidth="150" />
+                    <Button fx:id="addAttributeButton" text="Add" />
+                </HBox>
+                <ListView fx:id="attributesListView" prefHeight="100" />
+            </VBox>
+            
+            <Label text="Price Modifiers:" GridPane.rowIndex="8" GridPane.columnIndex="0" GridPane.valignment="TOP" />
+            <VBox spacing="5" GridPane.rowIndex="8" GridPane.columnIndex="1">
+                <HBox spacing="5">
+                    <TextField fx:id="modifierNameField" promptText="Modifier Name" prefWidth="150" />
+                    <TextField fx:id="modifierValueField" promptText="Modifier Value" prefWidth="150" />
+                    <Button fx:id="addModifierButton" text="Add" />
+                </HBox>
+                <ListView fx:id="modifiersListView" prefHeight="100" />
+            </VBox>
+        </GridPane>
+    </content>
+    
+    <buttonTypes>
+        <ButtonType fx:constant="OK" />
+        <ButtonType fx:constant="CANCEL" />
+    </buttonTypes>
+</DialogPane>

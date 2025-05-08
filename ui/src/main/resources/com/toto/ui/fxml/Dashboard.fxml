@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <ScrollPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.DashboardController" fitToWidth="true" styleClass="content-area">
@@ -11,13 +10,9 @@
         <padding>
             <Insets top="20" right="20" bottom="20" left="20"/>
         </padding>
-        
-        <Label text="Dashboard" styleClass="section-title">
-            <font>
-                <Font name="System Bold" size="24.0"/>
-            </font>
-        </Label>
-        
+
+        <Label text="Dashboard" styleClass="section-title"/>
+
         <!-- Summary Tiles -->
         <HBox spacing="20">
             <!-- Total Furniture Tile -->
@@ -30,7 +25,7 @@
                     </VBox>
                 </HBox>
             </VBox>
-            
+
             <!-- Chairs Tile -->
             <VBox styleClass="dashboard-tile">
                 <HBox spacing="10">
@@ -41,7 +36,7 @@
                     </VBox>
                 </HBox>
             </VBox>
-            
+
             <!-- Beds Tile -->
             <VBox styleClass="dashboard-tile">
                 <HBox spacing="10">
@@ -52,7 +47,7 @@
                     </VBox>
                 </HBox>
             </VBox>
-            
+
             <!-- Sofas Tile -->
             <VBox styleClass="dashboard-tile">
                 <HBox spacing="10">
@@ -64,14 +59,10 @@
                 </HBox>
             </VBox>
         </HBox>
-        
+
         <!-- Recent Items Section -->
-        <Label text="Recent Items" styleClass="section-title">
-            <font>
-                <Font name="System Bold" size="18.0"/>
-            </font>
-        </Label>
-        
+        <Label text="Recent Items" styleClass="section-title"/>
+
         <TableView fx:id="recentItemsTable" prefHeight="200">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
@@ -82,14 +73,10 @@
                 <TableColumn fx:id="manufacturerColumn" text="Manufacturer" prefWidth="150"/>
             </columns>
         </TableView>
-        
+
         <!-- Quick Actions Section -->
-        <Label text="Quick Actions" styleClass="section-title">
-            <font>
-                <Font name="System Bold" size="18.0"/>
-            </font>
-        </Label>
-        
+        <Label text="Quick Actions" styleClass="section-title"/>
+
         <HBox spacing="10">
             <Button fx:id="addFurnitureButton" text="Add Furniture" onAction="#handleAddFurniture">
                 <graphic>

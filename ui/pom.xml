@@ -13,6 +13,24 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <junit.version>5.10.2</junit.version>  </properties>
 
+  <repositories>
+    <repository>
+      <id>jfxtras-releases</id>
+      <name>JFXtras OSS Releases</name>
+      <url>https://nexus.jfxtras.org/nexus/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -21,11 +39,26 @@
     </dependency>
 
     <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-base</artifactId>
+      <version>21</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>21</version>
+    </dependency>
+    <dependency>
       <groupId>org.jfxtras</groupId>
       <artifactId>jmetro</artifactId>
       <version>11.6.15</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.openjfx</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
-
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
@@ -58,6 +91,14 @@
     </dependency><dependency>
       <groupId>org.kordamp.ikonli</groupId>
       <artifactId>ikonli-javafx</artifactId>
+      <version>12.3.1</version>
+    </dependency><dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-fontawesome5-pack</artifactId>
+      <version>12.3.1</version>
+    </dependency><dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-core</artifactId>
       <version>12.3.1</version>
     </dependency><dependency>
       <groupId>eu.hansolo</groupId>

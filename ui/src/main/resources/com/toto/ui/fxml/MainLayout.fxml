@@ -3,17 +3,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.toto.ui.MainLayoutController" stylesheets="@../styles/styles.css">
     <top>
         <HBox styleClass="header-bar">
-            <Label text="Furniture Inventory Management" styleClass="header-title">
-                <font>
-                    <Font name="System Bold" size="18.0"/>
-                </font>
-            </Label>
+            <Label text="Furniture Inventory Management" styleClass="header-title"/>
             <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="settingsButton" styleClass="icon-button">
                 <graphic>

@@ -2,10 +2,12 @@ module com.toto.ui {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.graphics;
 
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.fontawesome5;
     requires eu.hansolo.tilesfx;
     requires spring.beans;
     requires com.toto.backend;

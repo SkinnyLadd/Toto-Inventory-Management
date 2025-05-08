@@ -15,6 +15,7 @@ open module com.toto.backend {
     // Export your packages so the UI module can access them
     exports com.toto.backend.entities;
     exports com.toto.backend.services;
+    exports com.toto.backend.services.interfaces;
     exports com.toto.backend.repositories;
     exports com.toto.backend.entities.enums;
 
