@@ -66,6 +66,7 @@ public class App extends Application {
 
         stage.setTitle("Furniture Inventory Management");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

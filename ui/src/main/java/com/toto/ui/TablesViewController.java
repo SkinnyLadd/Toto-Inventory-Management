@@ -58,6 +58,9 @@ public class TablesViewController {
         setupFilterComboBox();
         refreshData();
 
+        // Add this code to make columns equally spaced and fill width
+        tablesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         // Setup pagination
         pagination.setPageFactory(this::createPage);
     }
