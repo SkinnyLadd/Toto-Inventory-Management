@@ -112,18 +112,47 @@
     -fx-padding: 10 5;
 }
 
-.table-row-cell:odd {
+/* ———————— Force fully opaque black text everywhere ———————— */
+/* 1) On the TableCell itself */
+.table-view .table-cell {
+    -fx-text-fill: black !important;
+    -fx-opacity: 1 !important;
+}
+
+/* 2) On any Text node inside the cell */
+.table-view .table-cell .text {
+    -fx-fill: black !important;
+    -fx-opacity: 1 !important;
+}
+
+/* 3) (Just in case) On Label nodes inside headers/footers */
+.table-view .table-cell .label {
+    -fx-text-fill: black !important;
+    -fx-opacity: 1 !important;
+}
+
+/* —————————— Zebra striping —————————— */
+.table-view .table-row-cell:even {
+    -fx-background-color: white;
+}
+.table-view .table-row-cell:odd {
     -fx-background-color: #f9f9f9;
 }
 
-.table-row-cell:selected {
-    -fx-background-color: #3498db;
-    -fx-text-fill: white;
+/* —————————— Hover state —————————— */
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ececec !important;
 }
+.table-view .table-row-cell:hover .table-cell,
+.table-view .table-row-cell:hover .table-cell .text {
+    -fx-text-fill: #7f8c8d !important;
+}
+
 
 /* Form Controls */
 .text-field, .text-area, .combo-box {
     -fx-background-color: white;
+    -fx-text-fill: black;
     -fx-border-color: #ddd;
     -fx-border-width: 1;
     -fx-border-radius: 4;

@@ -11,5 +11,6 @@ public enum WoodType {
     TEAK,
     MDF,
     LAMINATE,
-    OAK
+    OAK,
+    OTHER
 }
